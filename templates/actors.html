@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Актори та Фільми{% endblock %}
+
+{% block content %}
+<h1>Актори та їх фільми</h1>
+
+{% if actors %}
+<table>
+    <thead>
+        <tr>
+            <th>Актор</th>
+            <th>Фільми</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for actor in actors %}
+        <tr>
+            <td>{{ actor.name }}</td>
+            <td>
+                {% if actor.movies %}
+                    {{ actor.movies | map(attribute='title') | join(', ') }}
+                {% else %}
+                    Немає фільмів
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Акторів поки немає.</p>
+{% endif %}
+
+{% endblock %}
